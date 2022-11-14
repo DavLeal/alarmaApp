@@ -1,6 +1,8 @@
+import 'package:alarma_app/paginas/menu_inicio.dart';
 import 'package:flutter/material.dart';
 
 import 'login_screen.dart';
+import 'menu_casa.dart';
 
 class ConfigurarPage extends StatefulWidget {
   static String id = 'menu_configurar';
@@ -33,6 +35,11 @@ class _ConfigurarPageState extends State<ConfigurarPage> {
                   ],
                 ),
                 decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: NetworkImage(
+                        "https://alarmas.plus/wp-content/uploads/2021/04/como-instalar-una-alarma-en-casa.png"),
+                    fit: BoxFit.contain,
+                  ),
                   color: Color.fromARGB(255, 4, 70, 124),
                 ),
               ),
@@ -41,7 +48,10 @@ class _ConfigurarPageState extends State<ConfigurarPage> {
                 leading: Icon(Icons.home),
                 textColor: Colors.white,
                 title: Text('Configurar Casa'),
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => ConfigurarCasa()));
+                },
               ),
               ListTile(
                 iconColor: Colors.white,
@@ -74,5 +84,14 @@ class _ConfigurarPageState extends State<ConfigurarPage> {
         ),
       ),
     );
+  }
+}
+
+class PaginaCasa extends StatelessWidget {
+  //const PaginaConfigurar({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ConfigurarCasa();
   }
 }

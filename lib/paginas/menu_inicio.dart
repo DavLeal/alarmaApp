@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import '../providers/inicio_form_provider.dart';
+import 'menu_casa.dart';
 
 class MenuInicio extends StatefulWidget {
   const MenuInicio({Key? key}) : super(key: key);
@@ -155,6 +156,8 @@ class PaginaConfigurar extends StatelessWidget {
     return ConfigurarPage();
   }
 }
+
+
 
 /*
 class _MenuForm extends StatelessWidget {

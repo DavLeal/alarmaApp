@@ -1,16 +1,15 @@
-import 'package:alarma_app/paginas/admin_menu_casa.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/auth_background.dart';
 import '../widgets/card_container.dart';
 
-class ConfigurarCasa extends StatefulWidget {
+class AdministrarCasa extends StatefulWidget {
   @override
-  State<ConfigurarCasa> createState() => _ConfigurarCasaState();
+  State<AdministrarCasa> createState() => _AdministrarCasaState();
 }
 
-class _ConfigurarCasaState extends State<ConfigurarCasa> {
+class _AdministrarCasaState extends State<AdministrarCasa> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,8 +35,8 @@ class _ConfigurarCasaState extends State<ConfigurarCasa> {
                         color: Colors.blue,
                         child: Container(
                           padding: EdgeInsets.symmetric(
-                              horizontal: 50, vertical: 15),
-                          child: Text("Agregar Hogar"),
+                              horizontal: 38, vertical: 15),
+                          child: Text("Agregar administradores"),
                         ),
                         onPressed: () {
                           //Navigator.of(context).push(
@@ -55,14 +54,13 @@ class _ConfigurarCasaState extends State<ConfigurarCasa> {
                         child: Container(
                           padding: EdgeInsets.symmetric(
                               horizontal: 50, vertical: 15),
-                          child: Text("Eliminar Hogar"),
+                          child: Text("Configurar botones"),
                         ),
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => AdministrarCasa()));
+                          //Navigator.push(context,
+                          //  MaterialPageRoute(builder: (context) => NewUser()));
                         }),
+                    Container(child: Column()),
                   ],
                 ),
               ),

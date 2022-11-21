@@ -1,3 +1,5 @@
+import 'package:alarma_app/paginas/admin_menu_casa.dart';
+import 'package:alarma_app/paginas/admin_menu_res.dart';
 import 'package:alarma_app/paginas/menu_configurar.dart';
 import 'package:alarma_app/providers/login_form_provider.dart';
 import 'package:alarma_app/ui/input_decorations.dart';
@@ -118,8 +120,10 @@ class PaginaHome extends StatelessWidget {
                         child: Text("HOGAR"),
                       ),
                       onPressed: () {
-                        /*Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => MenuInicio()));*/
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => AdministrarCasa()));
                       }),
                   SizedBox(height: 60),
                   MaterialButton(
@@ -134,8 +138,10 @@ class PaginaHome extends StatelessWidget {
                       child: Text("RESIDENCIAL"),
                     ),
                     onPressed: () {
-                      /*Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => MenuInicio()));*/
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => AdministrarCondominio()));
                     },
                   ),
                 ],

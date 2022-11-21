@@ -1,6 +1,7 @@
 import 'package:alarma_app/paginas/menu_inicio.dart';
 import 'package:flutter/material.dart';
 
+import 'admin_menu_casa.dart';
 import 'login_screen.dart';
 import 'menu_casa.dart';
 
@@ -16,7 +17,7 @@ class _ConfigurarPageState extends State<ConfigurarPage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Center(child: Text("Hogar")),
+          title: const Center(child: Text("Configuración")),
         ),
         drawer: Drawer(
           backgroundColor: Color.fromARGB(255, 4, 67, 119),
@@ -57,7 +58,7 @@ class _ConfigurarPageState extends State<ConfigurarPage> {
                 iconColor: Colors.white,
                 leading: Icon(Icons.build),
                 textColor: Colors.white,
-                title: Text('Configurar Residencial'),
+                title: Text('Configurar Condominio'),
                 onTap: () {},
               ),
               ListTile(
@@ -92,6 +93,6 @@ class PaginaCasa extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ConfigurarCasa();
+    return AdministrarCasa();
   }
 }

@@ -54,7 +54,7 @@ class _AdministrarCasaState extends State<AdministrarCasa> {
                         child: Container(
                           padding: EdgeInsets.symmetric(
                               horizontal: 50, vertical: 15),
-                          child: Text("Configurar botones"),
+                          child: Text("Eliminar Administrador"),
                         ),
                         onPressed: () {
                           //Navigator.push(context,

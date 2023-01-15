@@ -8,7 +8,7 @@ class AuthBackground extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      //color: const Color.fromARGB(255, 249, 249, 250),
+      color: Color.fromARGB(255, 214, 225, 243),
       width: double.infinity,
       height: double.infinity,
       child: Stack(
@@ -47,8 +47,8 @@ class _BlueBox extends StatelessWidget {
     return Container(
       width: double.infinity,
       height: size.height * 0.4,
-      //color: const Color.fromARGB(255, 4, 79, 141),
-      decoration: _bluebackground(),
+      color: Color.fromARGB(255, 19, 92, 151),
+      //decoration: _bluebackground(),
       child: Stack(
         children: [
           Positioned(
@@ -57,9 +57,12 @@ class _BlueBox extends StatelessWidget {
             left: 30,
           ),
           Positioned(
-            child: Text("NOMBRE DE LA APP"),
-            top: 40,
-            left: 125,
+            child: Text(
+              "TRACKYLARM",
+              textAlign: TextAlign.center,
+            ),
+            top: 60,
+            left: 150,
           ),
         ],
       ),
@@ -68,7 +71,7 @@ class _BlueBox extends StatelessWidget {
 
   BoxDecoration _bluebackground() => const BoxDecoration(
         gradient: LinearGradient(colors: [
-          Color.fromARGB(28, 59, 112, 224),
+          Color.fromARGB(28, 33, 62, 124),
           Color.fromARGB(24, 4, 38, 131),
         ]),
       );
@@ -84,7 +87,7 @@ class _Buble extends StatelessWidget {
       height: 100,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(100),
-        color: const Color.fromRGBO(255, 255, 255, 0.05),
+        color: Color.fromARGB(10, 189, 192, 235),
       ),
     );
   }

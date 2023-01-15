@@ -30,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
           Container(
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("assets/matrix.jpg"),
+                image: AssetImage("assets/LogoApp.jpeg"),
                 fit: BoxFit.cover,
               ),
             ),
@@ -38,7 +38,7 @@ class _SplashScreenState extends State<SplashScreen> {
               alignment: Alignment.bottomLeft,
               child: ListTile(
                 title: Text(
-                  "ALARMA APP",
+                  "TRACKYLARM",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 30,

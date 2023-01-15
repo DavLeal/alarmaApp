@@ -1,6 +1,7 @@
 import 'dart:convert' as convert;
 import 'dart:convert';
 
+import 'package:alarma_app/paginas/menu_inicio.dart';
 import 'package:alarma_app/widgets/auth_background.dart';
 import 'package:alarma_app/widgets/card_container_menu.dart';
 import 'package:flutter/material.dart';
@@ -8,26 +9,24 @@ import 'package:http/http.dart' as http;
 
 import 'package:alarma_app/paginas/login_screen.dart';
 
-import '../providers/login_form_provider.dart';
+import '../providers/alarm_form_provider.dart';
 import '../widgets/new_background.dart';
 
-class NewUser extends StatefulWidget {
-  static String id = 'new_user';
+class NewAlarm extends StatefulWidget {
+  static String id = 'new_uAlarm';
   @override
-  _NewUserState createState() => _NewUserState();
+  _NewAlarmState createState() => _NewAlarmState();
 }
 
-class _NewUserState extends State<NewUser> {
-  final url = Uri.parse("https://lcix7d.deta.dev/api/v1/users/?limit=100");
+class _NewAlarmState extends State<NewAlarm> {
+  final url = Uri.parse("https://lcix7d.deta.dev/api/v1/alarms/?limit=100");
   final url1 = Uri.parse("https://lcix7d.deta.dev/docs#/users/");
-  late Future<List<Usuario>> _listaUsuarios;
-  final nombre = TextEditingController();
-  final password = TextEditingController();
-  final email = TextEditingController();
-  final last_name = TextEditingController();
-  final role = TextEditingController();
+  late Future<List<Alarm>> _listaCar;
+  final code = TextEditingController();
+  final phone = TextEditingController();
+  final mode = TextEditingController();
 
-  Future<List<Usuario>> _getUsuario() async {
+  Future<List<Alarm>> _getUsuario() async {
     final res = await http.get(url);
     if (res.statusCode == 200) {
       //print(res.body);
@@ -41,7 +40,7 @@ class _NewUserState extends State<NewUser> {
 
   void initState() {
     super.initState();
-    saveUsuarios();
+    saveAlarm();
   }
 
   @override
@@ -67,27 +66,19 @@ class _NewUserState extends State<NewUser> {
                       SizedBox(
                         height: 15.0,
                       ),
-                      _userEmailTextField(),
+                      _codeTextField(),
                       SizedBox(
                         height: 15.0,
                       ),
-                      _userNameTextField(),
+                      _phoneTextField(),
                       SizedBox(
                         height: 20.0,
                       ),
-                      _userLastNameTextField(),
+                      _modeTextField(),
                       SizedBox(
                         height: 15.0,
                       ),
-                      _passwordTextField(),
-                      SizedBox(
-                        height: 15.0,
-                      ),
-                      _roleTextField(),
-                      SizedBox(
-                        height: 20.0,
-                      ),
-                      _buttonSignIn(),
+                      _buttonAdd(),
                       SizedBox(
                         height: 20.0,
                       ),
@@ -103,18 +94,18 @@ class _NewUserState extends State<NewUser> {
     );
   }
 
-  Widget _userNameTextField() {
+  Widget _codeTextField() {
     return StreamBuilder(
         builder: (BuildContext context, AsyncSnapshot snapshot) {
       return Container(
         padding: EdgeInsets.symmetric(horizontal: 35.0),
         child: TextField(
-          controller: nombre,
-          keyboardType: TextInputType.name,
+          controller: code,
+          keyboardType: TextInputType.number,
           decoration: InputDecoration(
-            icon: Icon(Icons.person),
-            hintText: 'Juan',
-            labelText: 'Ingrese su(s) nombre(s)',
+            icon: Icon(Icons.code),
+            hintText: '000101010101652145647',
+            labelText: 'Ingrese el código de su alarma',
           ),
           onChanged: (value) {},
         ),
@@ -122,18 +113,18 @@ class _NewUserState extends State<NewUser> {
     });
   }
 
-  Widget _userEmailTextField() {
+  Widget _phoneTextField() {
     return StreamBuilder(
         builder: (BuildContext context, AsyncSnapshot snapshot) {
       return Container(
         padding: EdgeInsets.symmetric(horizontal: 35.0),
         child: TextField(
-          controller: email,
-          keyboardType: TextInputType.emailAddress,
+          controller: phone,
+          keyboardType: TextInputType.number,
           decoration: InputDecoration(
-            icon: Icon(Icons.email),
-            hintText: 'ejemplo@correo.com',
-            labelText: 'Correo Electrónico',
+            icon: Icon(Icons.phone),
+            hintText: '5516479512',
+            labelText: 'Ingrese el numero telefónico de su tarjeta SIM',
           ),
           onChanged: (value) {},
         ),
@@ -141,18 +132,18 @@ class _NewUserState extends State<NewUser> {
     });
   }
 
-  Widget _userLastNameTextField() {
+  Widget _modeTextField() {
     return StreamBuilder(
         builder: (BuildContext context, AsyncSnapshot snapshot) {
       return Container(
         padding: EdgeInsets.symmetric(horizontal: 35.0),
         child: TextField(
-          controller: last_name,
+          controller: mode,
           keyboardType: TextInputType.text,
           decoration: InputDecoration(
             icon: Icon(Icons.perm_identity_sharp),
-            hintText: 'Pérez',
-            labelText: 'Ingrese sus apellidos',
+            hintText: 'Car/house',
+            labelText: 'Ingrese el modo de su alarma',
           ),
           onChanged: (value) {},
         ),
@@ -160,54 +151,14 @@ class _NewUserState extends State<NewUser> {
     });
   }
 
-  Widget _passwordTextField() {
-    return StreamBuilder(
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-      return Container(
-        padding: EdgeInsets.symmetric(horizontal: 35.0),
-        child: TextField(
-          controller: password,
-          keyboardType: TextInputType.emailAddress,
-          obscureText: true,
-          decoration: InputDecoration(
-            icon: Icon(Icons.lock),
-            hintText: 'Contraseña',
-            labelText: 'Contraseña',
-          ),
-          onChanged: (value) {},
-        ),
-      );
-    });
-  }
-
-  Widget _roleTextField() {
-    return StreamBuilder(
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-      return Container(
-        padding: EdgeInsets.symmetric(horizontal: 35.0),
-        child: TextField(
-          controller: role,
-          keyboardType: TextInputType.emailAddress,
-          obscureText: true,
-          decoration: InputDecoration(
-            icon: Icon(Icons.privacy_tip),
-            hintText: '(Administrador, Usuario)',
-            labelText: 'Rol de usuario',
-          ),
-          onChanged: (value) {},
-        ),
-      );
-    });
-  }
-
-  Widget _buttonSignIn() {
+  Widget _buttonAdd() {
     return StreamBuilder(
         builder: (BuildContext context, AsyncSnapshot snapshot) {
       return RaisedButton(
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 60.0, vertical: 15.0),
             child: Text(
-              'Registrarse',
+              'Agregar',
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -221,7 +172,7 @@ class _NewUserState extends State<NewUser> {
           elevation: 10.0,
           color: Color.fromARGB(255, 29, 113, 182),
           onPressed: () {
-            saveUsuarios();
+            saveAlarm();
           });
     });
   }
@@ -249,7 +200,7 @@ class _NewUserState extends State<NewUser> {
           onPressed: () {
             Navigator.pop(
               context,
-              MaterialPageRoute(builder: (context) => LoginScreen()),
+              MaterialPageRoute(builder: (context) => MenuInicio()),
             );
           });
     });
@@ -261,19 +212,19 @@ class _NewUserState extends State<NewUser> {
   //   usuarios = getUsuarios();
   // }
 
-  Future<List<Usuario>> getUsuarios() async {
+  Future<List<Alarm>> _getAlarm() async {
     final res = await http.get(url);
     //final encodeFirst = json.encode(); //texto
     //final lista = json.decode(res.body);
     String json = res.body;
     List list = convert.json.decode(json);
-    final user = <Usuario>[];
-    List<Usuario> usuarios = [];
+    final user = <Alarm>[];
+    List<Alarm> alarm = [];
     list.forEach((element) {
-      final Usuario user = Usuario.fromJson(element);
-      usuarios.add(user);
+      final Alarm alarms = Alarm.fromJson(element);
+      alarm.add(alarms);
     });
-    return usuarios;
+    return alarm;
   }
 
   /*Future<dynamic> _getUsuarios() async {
@@ -285,13 +236,12 @@ class _NewUserState extends State<NewUser> {
     }
   } */
 
-  void saveUsuarios() async {
+  void saveAlarm() async {
     final user = {
-      "name": nombre.text,
-      "last_name": last_name.text,
+      "code": code.text,
+      "phone": phone.text,
       //"role": role.text,
-      "email": email.text,
-      "password": password.text
+      "mode": mode.text,
     };
     var response = await http.post(url,
         body: convert.jsonEncode(user),
@@ -300,13 +250,11 @@ class _NewUserState extends State<NewUser> {
     print('Response body: ${response.body}');
 
     //print(await http.read(Uri.https('example.com', 'foobar.txt')));
-    nombre.clear();
-    last_name.clear();
-    role.clear();
-    email.clear();
-    password.clear();
+    code.clear();
+    phone.clear();
+    mode.clear();
     setState(() {
-      _listaUsuarios = _getUsuario();
+      _listaCar = _getAlarm();
     });
   }
 }

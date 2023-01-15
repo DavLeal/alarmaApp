@@ -1,49 +1,17 @@
-import 'dart:convert' as convert;
-import 'dart:convert';
-
 import 'package:alarma_app/widgets/auth_background.dart';
 import 'package:alarma_app/widgets/card_container_menu.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-
 import 'package:alarma_app/paginas/login_screen.dart';
 
-import '../providers/login_form_provider.dart';
 import '../widgets/new_background.dart';
 
 class NewUser extends StatefulWidget {
-  static String id = 'new_user';
+  static String id = 'new_home';
   @override
   _NewUserState createState() => _NewUserState();
 }
 
 class _NewUserState extends State<NewUser> {
-  final url = Uri.parse("https://lcix7d.deta.dev/api/v1/users/?limit=100");
-  final url1 = Uri.parse("https://lcix7d.deta.dev/docs#/users/");
-  late Future<List<Usuario>> _listaUsuarios;
-  final nombre = TextEditingController();
-  final password = TextEditingController();
-  final email = TextEditingController();
-  final last_name = TextEditingController();
-  final role = TextEditingController();
-
-  Future<List<Usuario>> _getUsuario() async {
-    final res = await http.get(url);
-    if (res.statusCode == 200) {
-      //print(res.body);
-      String body = utf8.decode(res.bodyBytes);
-      final jsonData = convert.jsonDecode(body);
-    } else {
-      throw Exception("Fallo la conexion");
-    }
-    return _getUsuario();
-  }
-
-  void initState() {
-    super.initState();
-    saveUsuarios();
-  }
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -109,7 +77,6 @@ class _NewUserState extends State<NewUser> {
       return Container(
         padding: EdgeInsets.symmetric(horizontal: 35.0),
         child: TextField(
-          controller: nombre,
           keyboardType: TextInputType.name,
           decoration: InputDecoration(
             icon: Icon(Icons.person),
@@ -128,7 +95,6 @@ class _NewUserState extends State<NewUser> {
       return Container(
         padding: EdgeInsets.symmetric(horizontal: 35.0),
         child: TextField(
-          controller: email,
           keyboardType: TextInputType.emailAddress,
           decoration: InputDecoration(
             icon: Icon(Icons.email),
@@ -147,8 +113,7 @@ class _NewUserState extends State<NewUser> {
       return Container(
         padding: EdgeInsets.symmetric(horizontal: 35.0),
         child: TextField(
-          controller: last_name,
-          keyboardType: TextInputType.text,
+          keyboardType: TextInputType.number,
           decoration: InputDecoration(
             icon: Icon(Icons.perm_identity_sharp),
             hintText: 'Pérez',
@@ -166,7 +131,6 @@ class _NewUserState extends State<NewUser> {
       return Container(
         padding: EdgeInsets.symmetric(horizontal: 35.0),
         child: TextField(
-          controller: password,
           keyboardType: TextInputType.emailAddress,
           obscureText: true,
           decoration: InputDecoration(
@@ -186,7 +150,6 @@ class _NewUserState extends State<NewUser> {
       return Container(
         padding: EdgeInsets.symmetric(horizontal: 35.0),
         child: TextField(
-          controller: role,
           keyboardType: TextInputType.emailAddress,
           obscureText: true,
           decoration: InputDecoration(
@@ -220,9 +183,7 @@ class _NewUserState extends State<NewUser> {
           ),
           elevation: 10.0,
           color: Color.fromARGB(255, 29, 113, 182),
-          onPressed: () {
-            saveUsuarios();
-          });
+          onPressed: () {});
     });
   }
 
@@ -252,61 +213,6 @@ class _NewUserState extends State<NewUser> {
               MaterialPageRoute(builder: (context) => LoginScreen()),
             );
           });
-    });
-  }
-
-  @override
-  // void initState() {
-  //   super.initState();
-  //   usuarios = getUsuarios();
-  // }
-
-  Future<List<Usuario>> getUsuarios() async {
-    final res = await http.get(url);
-    //final encodeFirst = json.encode(); //texto
-    //final lista = json.decode(res.body);
-    String json = res.body;
-    List list = convert.json.decode(json);
-    final user = <Usuario>[];
-    List<Usuario> usuarios = [];
-    list.forEach((element) {
-      final Usuario user = Usuario.fromJson(element);
-      usuarios.add(user);
-    });
-    return usuarios;
-  }
-
-  /*Future<dynamic> _getUsuarios() async {
-    final respuesta = await http.get(url);
-    if (respuesta.statusCode == 200) {
-      return jsonDecode(respuesta.body);
-    } else {
-      print("Error en la respuesta");
-    }
-  } */
-
-  void saveUsuarios() async {
-    final user = {
-      "name": nombre.text,
-      "last_name": last_name.text,
-      //"role": role.text,
-      "email": email.text,
-      "password": password.text
-    };
-    var response = await http.post(url,
-        body: convert.jsonEncode(user),
-        headers: {"Content-Type": "application/json;charset=UTF-8"});
-    print('Response status: ${response.statusCode}');
-    print('Response body: ${response.body}');
-
-    //print(await http.read(Uri.https('example.com', 'foobar.txt')));
-    nombre.clear();
-    last_name.clear();
-    role.clear();
-    email.clear();
-    password.clear();
-    setState(() {
-      _listaUsuarios = _getUsuario();
     });
   }
 }

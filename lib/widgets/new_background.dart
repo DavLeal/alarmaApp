@@ -57,9 +57,9 @@ class _BlueBox extends StatelessWidget {
             left: 30,
           ),
           Positioned(
-            child: Text("Registrese"),
+            child: Text("Registrar"),
             top: 40,
-            left: 125,
+            left: 170,
           ),
         ],
       ),

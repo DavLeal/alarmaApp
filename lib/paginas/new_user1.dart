@@ -1,6 +1,7 @@
 import 'dart:convert' as convert;
 import 'dart:convert';
 
+import 'package:alarma_app/paginas/menu_inicio.dart';
 import 'package:alarma_app/widgets/auth_background.dart';
 import 'package:alarma_app/widgets/card_container_menu.dart';
 import 'package:flutter/material.dart';
@@ -11,13 +12,13 @@ import 'package:alarma_app/paginas/login_screen.dart';
 import '../providers/login_form_provider.dart';
 import '../widgets/new_background.dart';
 
-class NewUser extends StatefulWidget {
-  static String id = 'new_user';
+class NewUser1 extends StatefulWidget {
+  static String id = 'new_user1';
   @override
-  _NewUserState createState() => _NewUserState();
+  _NewUser1State createState() => _NewUser1State();
 }
 
-class _NewUserState extends State<NewUser> {
+class _NewUser1State extends State<NewUser1> {
   final url = Uri.parse("https://lcix7d.deta.dev/api/v1/users/?limit=100");
   final url1 = Uri.parse("https://lcix7d.deta.dev/docs#/users/");
   late Future<List<Usuario>> _listaUsuarios;
@@ -207,7 +208,7 @@ class _NewUserState extends State<NewUser> {
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 60.0, vertical: 15.0),
             child: Text(
-              'Registrarse',
+              'Registrar',
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -249,7 +250,7 @@ class _NewUserState extends State<NewUser> {
           onPressed: () {
             Navigator.pop(
               context,
-              MaterialPageRoute(builder: (context) => LoginScreen()),
+              MaterialPageRoute(builder: (context) => MenuInicio()),
             );
           });
     });
